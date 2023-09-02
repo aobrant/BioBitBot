@@ -6,6 +6,7 @@ from aiogram.types import Message
 
 from keyboards import inline_kb_begin
 from misc import States
+from sql_integrate import save_data
 
 router = Router()
 
@@ -22,6 +23,7 @@ async def i_weight(message: Message, state: FSMContext):
     await state.update_data(weight=Decimal(message.text))
     user_data = await state.get_data()
     await message.answer(text=f"Weight {user_data['weight']} .\n")
+    save_data(user_d=message.from_user.id, parameter_d="weight", value_d=user_data['weight'], units_d="kg")
     await message.answer(
         "Hi! I'm BioBitBot 👽 ",
         reply_markup=inline_kb_begin.as_markup()

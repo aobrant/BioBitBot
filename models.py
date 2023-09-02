@@ -12,7 +12,7 @@ class Records(Base):
     parameter = sq.Column(sq.String(length=40))
     value = sq.Column(sq.DECIMAL(precision=10, scale=2))
     units = sq.Column(sq.TEXT)
-    date = sq.Column(sq.DATETIME)
+    date = sq.Column(sq.TIMESTAMP)
 
 
 def create_tables(engine):
