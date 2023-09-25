@@ -45,7 +45,7 @@ def save_data(user_d, parameter_d, value_d, units_d):
 
 def count_items_for_user(user_name):
     res_dict = defaultdict(int)  # Используем defaultdict для автоматического создания счетчиков
-    records = session.query(Records).filter(Records.user == 356758392)
+    records = session.query(Records).filter(Records.user == user_name)
 
     for record in records:
         parameter = record.parameter
