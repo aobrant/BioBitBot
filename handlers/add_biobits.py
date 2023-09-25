@@ -134,12 +134,12 @@ async def slp_ql_1(callback: types.CallbackQuery):
 
 @router.callback_query(F.data == "btn_pressure")
 async def add_bits(callback: types.CallbackQuery, state: FSMContext):
-    await callback.message.answer("Import blood presure in format up/down")
+    await callback.message.answer("Import blood pressure in format up/down")
     await state.set_state(States.presure_state)
 
 
 @router.message(States.presure_state, F.text.regexp(
-    r"^(1\d{0,1}|2[0-9]{0,2}|[1-9]{1,2}).(1\d{0,1}|2[0-9]{0,2}|[1-9]{1,2})$"))
+    r"^([1-3]\d{0,2}|[4-9]\d{0,1})[^\d][1-3]\d{0,2}|[4-9]\d{0,1}$"))
 async def i_weight(message: Message, state: FSMContext):
     text = message.text
     pattern = r'(\d{1,3}).*?(\d{1,3})'
@@ -171,6 +171,3 @@ async def weight_incorrect(message: Message):
     await message.answer(
         text="Incorrect pressure"
     )
-
-
-

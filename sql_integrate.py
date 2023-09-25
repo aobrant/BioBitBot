@@ -1,9 +1,10 @@
 import os
 from datetime import datetime
+from collections import defaultdict
 
 import psycopg2
 from dotenv import load_dotenv
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, MetaData, Table, select, func, Column, String, Float
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
 
@@ -40,3 +41,17 @@ def save_data(user_d, parameter_d, value_d, units_d):
         session.close()
 
     return "ok"
+
+
+def count_items_for_user(user_name):
+    res_dict = defaultdict(int)  # Используем defaultdict для автоматического создания счетчиков
+    records = session.query(Records).filter(Records.user == 356758392)
+
+    for record in records:
+        parameter = record.parameter
+        res_dict[parameter] += 1
+
+    return dict(res_dict)
+
+
+

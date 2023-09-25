@@ -8,7 +8,7 @@ import os
 import keyboards as kb
 from misc import help_message
 
-from handlers import begin, add_biobits, add_sport, add_alcohol
+from handlers import begin, add_biobits, add_sport, add_alcohol, view_biobits
 
 load_dotenv()
 TelegramToken = os.getenv("TOKEN")
@@ -22,6 +22,7 @@ dp.include_router(begin.router)
 dp.include_router(add_biobits.router)
 dp.include_router(add_sport.router)
 dp.include_router(add_alcohol.router)
+dp.include_router(view_biobits.router)
 
 
 @dp.message(Command("help"))

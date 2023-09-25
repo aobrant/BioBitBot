@@ -13,7 +13,7 @@ router = Router()
 
 
 @router.callback_query(F.data == "btn_beer")
-async def slp_ql_1(callback: types.CallbackQuery):
+async def beer(callback: types.CallbackQuery):
     result = save_data(user_d=callback.from_user.id, parameter_d="beer", value_d=1, units_d="cup")
     if result is not None:
         await callback.message.answer(text="Done .\n")
@@ -26,7 +26,7 @@ async def slp_ql_1(callback: types.CallbackQuery):
 
 
 @router.callback_query(F.data == "btn_wine")
-async def slp_ql_1(callback: types.CallbackQuery):
+async def wine(callback: types.CallbackQuery):
     result = save_data(user_d=callback.from_user.id, parameter_d="wine", value_d=1, units_d="glass")
     if result is not None:
         await callback.message.answer(text="Done .\n")
@@ -39,7 +39,7 @@ async def slp_ql_1(callback: types.CallbackQuery):
 
 
 @router.callback_query(F.data == "btn_vodka")
-async def slp_ql_1(callback: types.CallbackQuery):
+async def vodka(callback: types.CallbackQuery):
     result = save_data(user_d=callback.from_user.id, parameter_d="vodka", value_d=1, units_d="shot")
     if result is not None:
         await callback.message.answer(text="Done .\n")
@@ -52,7 +52,7 @@ async def slp_ql_1(callback: types.CallbackQuery):
 
 
 @router.callback_query(F.data == "btn_whiskey")
-async def slp_ql_1(callback: types.CallbackQuery):
+async def whiskey(callback: types.CallbackQuery):
     result = save_data(user_d=callback.from_user.id, parameter_d="whiskey", value_d=1, units_d="shot")
     if result is not None:
         await callback.message.answer(text="Done .\n")
@@ -65,7 +65,7 @@ async def slp_ql_1(callback: types.CallbackQuery):
 
 
 @router.callback_query(F.data == "btn_rum")
-async def slp_ql_1(callback: types.CallbackQuery):
+async def rum(callback: types.CallbackQuery):
     result = save_data(user_d=callback.from_user.id, parameter_d="rum", value_d=1, units_d="shot")
     if result is not None:
         await callback.message.answer(text="Done .\n")
@@ -78,7 +78,7 @@ async def slp_ql_1(callback: types.CallbackQuery):
 
 
 @router.callback_query(F.data == "btn_tequila")
-async def slp_ql_1(callback: types.CallbackQuery):
+async def tquila(callback: types.CallbackQuery):
     result = save_data(user_d=callback.from_user.id, parameter_d="tequila", value_d=1, units_d="shot")
     if result is not None:
         await callback.message.answer(text="Done .\n")
@@ -91,7 +91,7 @@ async def slp_ql_1(callback: types.CallbackQuery):
 
 
 @router.callback_query(F.data == "btn_gin")
-async def slp_ql_1(callback: types.CallbackQuery):
+async def gin(callback: types.CallbackQuery):
     result = save_data(user_d=callback.from_user.id, parameter_d="gin", value_d=1, units_d="shot")
     if result is not None:
         await callback.message.answer(text="Done .\n")
