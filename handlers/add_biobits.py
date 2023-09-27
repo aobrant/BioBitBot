@@ -6,7 +6,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 
 from keyboards import inline_kb_begin
-from misc import States
+from misc import States, text_to_dec
 from sql_integrate import save_data
 
 router = Router()
@@ -18,11 +18,16 @@ async def add_bits(callback: types.CallbackQuery, state: FSMContext):
     await state.set_state(States.weight_state)
 
 
-@router.message(States.weight_state, F.text.regexp(r"^[+]?(?!-)(\d+\.\d+|\d+)$"))
+@router.message(States.weight_state, F.text.regexp(r'^[+-]?(\d{0,3}[,.]?\d{0,3}|\d{0,3})$'))
 async def i_weight(message: Message, state: FSMContext):
-    await state.update_data(weight=Decimal(message.text))
+    text = message.text
+    val, err = text_to_dec(text)
+    if not err:
+        await state.update_data(weight=Decimal(val))
+    else:
+        await message.answer(text="Some go wrong\n")
     user_data = await state.get_data()
-    result = save_data(user_d=message.from_user.id, parameter_d="weight", value_d=user_data['weight'], units_d="kg")
+    result = save_data(user_d=message.from_user.id, parameter_d="weight", value_d=val, units_d="kg")
     if result is not None:
         await message.answer(text="Done .\n")
     else:
@@ -149,7 +154,10 @@ async def i_weight(message: Message, state: FSMContext):
         number2 = int(match.group(2))
         number1_str = str(number1)
         number2_str = str(number2)
-        combined_str = f"{number1_str}.{number2_str}"
+        if number1 < number2:
+            combined_str = f"{number1_str}.{number2_str}"
+        else:
+            combined_str = f"{number2_str}.{number1_str}"
         pressure = Decimal(combined_str)
         # await state.update_data(pressure=Decimal(combined_str))
         # user_data = await state.get_data()

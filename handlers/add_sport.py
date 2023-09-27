@@ -6,7 +6,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 
 from keyboards import inline_kb_begin
-from misc import States
+from misc import States, text_to_dec
 from sql_integrate import save_data
 
 router = Router()
@@ -18,11 +18,16 @@ async def add_bits(callback: types.CallbackQuery, state: FSMContext):
     await state.set_state(States.walk_state)
 
 
-@router.message(States.walk_state, F.text.regexp(r"^[+]?(?!-)(\d+\.\d+|\d+)$"))
+@router.message(States.walk_state, F.text.regexp(r'^[+-]?(\d{0,3}[,.]?\d{0,3}|\d{0,3})$'))
 async def i_weight(message: Message, state: FSMContext):
-    await state.update_data(walk=Decimal(message.text))
+    text = message.text
+    val, err = text_to_dec(text)
+    if not err:
+        await state.update_data(walk=Decimal(val))
+    else:
+        await message.answer(text="Some go wrong\n")
     user_data = await state.get_data()
-    result = save_data(user_d=message.from_user.id, parameter_d="walk", value_d=user_data['walk'], units_d="km")
+    result = save_data(user_d=message.from_user.id, parameter_d="walk", value_d=val, units_d="km")
     if result is not None:
         await message.answer(text="Done .\n")
     else:
@@ -47,11 +52,16 @@ async def add_bits(callback: types.CallbackQuery, state: FSMContext):
     await state.set_state(States.running_state)
 
 
-@router.message(States.running_state, F.text.regexp(r"^[+]?(?!-)(\d+\.\d+|\d+)$"))
+@router.message(States.running_state, F.text.regexp(r'^[+-]?(\d{0,3}[,.]?\d{0,3}|\d{0,3})$'))
 async def i_weight(message: Message, state: FSMContext):
-    await state.update_data(run=Decimal(message.text))
+    text = message.text
+    val, err = text_to_dec(text)
+    if not err:
+        await state.update_data(walk=Decimal(val))
+    else:
+        await message.answer(text="Some go wrong\n")
     user_data = await state.get_data()
-    result = save_data(user_d=message.from_user.id, parameter_d="run", value_d=user_data['run'], units_d="km")
+    result = save_data(user_d=message.from_user.id, parameter_d="run", value_d=val, units_d="km")
     if result is not None:
         await message.answer(text="Done .\n")
     else:
@@ -76,11 +86,16 @@ async def add_bits(callback: types.CallbackQuery, state: FSMContext):
     await state.set_state(States.cycling_state)
 
 
-@router.message(States.cycling_state, F.text.regexp(r"^[+]?(?!-)(\d+\.\d+|\d+)$"))
+@router.message(States.cycling_state, F.text.regexp(r'^[+-]?(\d{0,3}[,.]?\d{0,3}|\d{0,3})$'))
 async def i_weight(message: Message, state: FSMContext):
-    await state.update_data(cicling=Decimal(message.text))
+    text = message.text
+    val, err = text_to_dec(text)
+    if not err:
+        await state.update_data(walk=Decimal(val))
+    else:
+        await message.answer(text="Some go wrong\n")
     user_data = await state.get_data()
-    result = save_data(user_d=message.from_user.id, parameter_d="cicling", value_d=user_data['cicling'], units_d="km")
+    result = save_data(user_d=message.from_user.id, parameter_d="cicling", value_d=val, units_d="km")
     if result is not None:
         await message.answer(text="Done .\n")
     else:
@@ -105,11 +120,16 @@ async def add_bits(callback: types.CallbackQuery, state: FSMContext):
     await state.set_state(States.fitness_state)
 
 
-@router.message(States.fitness_state, F.text.regexp(r"^[+]?(?!-)(\d+\.\d+|\d+)$"))
+@router.message(States.fitness_state, F.text.regexp(r'^[+-]?(\d{0,3}[,.]?\d{0,3}|\d{0,3})$'))
 async def i_weight(message: Message, state: FSMContext):
-    await state.update_data(fitness=Decimal(message.text))
+    text = message.text
+    val, err = text_to_dec(text)
+    if not err:
+        await state.update_data(walk=Decimal(val))
+    else:
+        await message.answer(text="Some go wrong\n")
     user_data = await state.get_data()
-    result = save_data(user_d=message.from_user.id, parameter_d="fitness", value_d=user_data['fitness'], units_d="hr")
+    result = save_data(user_d=message.from_user.id, parameter_d="fitness", value_d=val, units_d="hr")
     if result is not None:
         await message.answer(text="Done .\n")
     else:
@@ -134,11 +154,16 @@ async def add_bits(callback: types.CallbackQuery, state: FSMContext):
     await state.set_state(States.swimming_state)
 
 
-@router.message(States.swimming_state, F.text.regexp(r"^[+]?(?!-)(\d+\.\d+|\d+)$"))
+@router.message(States.swimming_state, F.text.regexp(r'^[+-]?(\d{0,3}[,.]?\d{0,3}|\d{0,3})$'))
 async def i_weight(message: Message, state: FSMContext):
-    await state.update_data(swim=Decimal(message.text))
+    text = message.text
+    val, err = text_to_dec(text)
+    if not err:
+        await state.update_data(walk=Decimal(val))
+    else:
+        await message.answer(text="Some go wrong\n")
     user_data = await state.get_data()
-    result = save_data(user_d=message.from_user.id, parameter_d="swim", value_d=user_data['swim'], units_d="hr")
+    result = save_data(user_d=message.from_user.id, parameter_d="swim", value_d=val, units_d="hr")
     if result is not None:
         await message.answer(text="Done .\n")
     else:
@@ -163,11 +188,16 @@ async def add_bits(callback: types.CallbackQuery, state: FSMContext):
     await state.set_state(States.hiking_state)
 
 
-@router.message(States.hiking_state, F.text.regexp(r"^[+]?(?!-)(\d+\.\d+|\d+)$"))
+@router.message(States.hiking_state, F.text.regexp(r'^[+-]?(\d{0,3}[,.]?\d{0,3}|\d{0,3})$'))
 async def i_weight(message: Message, state: FSMContext):
-    await state.update_data(hike=Decimal(message.text))
+    text = message.text
+    val, err = text_to_dec(text)
+    if not err:
+        await state.update_data(walk=Decimal(val))
+    else:
+        await message.answer(text="Some go wrong\n")
     user_data = await state.get_data()
-    result = save_data(user_d=message.from_user.id, parameter_d="hike", value_d=user_data['hike'], units_d="hr")
+    result = save_data(user_d=message.from_user.id, parameter_d="hike", value_d=val, units_d="hr")
     if result is not None:
         await message.answer(text="Done .\n")
     else:
@@ -192,11 +222,16 @@ async def add_bits(callback: types.CallbackQuery, state: FSMContext):
     await state.set_state(States.tennis_state)
 
 
-@router.message(States.tennis_state, F.text.regexp(r"^[+]?(?!-)(\d+\.\d+|\d+)$"))
+@router.message(States.tennis_state, F.text.regexp(r'^[+-]?(\d{0,3}[,.]?\d{0,3}|\d{0,3})$'))
 async def i_weight(message: Message, state: FSMContext):
-    await state.update_data(tennis=Decimal(message.text))
+    text = message.text
+    val, err = text_to_dec(text)
+    if not err:
+        await state.update_data(walk=Decimal(val))
+    else:
+        await message.answer(text="Some go wrong\n")
     user_data = await state.get_data()
-    result = save_data(user_d=message.from_user.id, parameter_d="tennis", value_d=user_data['tennis'], units_d="hr")
+    result = save_data(user_d=message.from_user.id, parameter_d="tennis", value_d=val, units_d="hr")
     if result is not None:
         await message.answer(text="Done .\n")
     else:
