@@ -3,7 +3,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 inline_btn_01 = InlineKeyboardButton(text='Add BioBits 🫳🏻 ', callback_data='btn_add_bits')
 inline_btn_02 = InlineKeyboardButton(text='View BioBits 👀', callback_data='btn_view_bits')
-inline_btn_03 = InlineKeyboardButton(text='Analyze your BioBits 📊 (under construction)',
+inline_btn_03 = InlineKeyboardButton(text='Analyze your BioBits 📊 ',
                                      callback_data='btn_analyze_bits')
 # inline_btn_04 = InlineKeyboardButton(text='Set reminder ⏰(under construction)', callback_data='btn_set_reminder')
 
