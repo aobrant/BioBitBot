@@ -1,10 +1,5 @@
 from aiogram import Router, F, types
 from aiogram.filters import Command
-from aiogram.fsm import state
-from aiogram.types import Message
-from decimal import Decimal
-
-from misc import States
 
 from keyboards import inline_kb_begin
 

@@ -114,6 +114,7 @@ async def slp_ql_1(callback: types.CallbackQuery):
 @router.callback_query(F.data == "btn_coffee")
 async def slp_ql_1(callback: types.CallbackQuery):
     result = save_data(user_d=callback.from_user.id, parameter_d="coffee", value_d=1, units_d="cup")
+    print(result)
     if result is not None:
         await callback.message.answer(text="Done .\n")
     else:

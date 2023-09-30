@@ -46,7 +46,6 @@ def save_data(user_d, parameter_d, value_d, units_d):
 def count_items_for_user(user_name):
     res_dict = defaultdict(int)  # Используем defaultdict для автоматического создания счетчиков
     records = session.query(Records).filter(Records.user == user_name)
-
     for record in records:
         parameter = record.parameter
         res_dict[parameter] += 1
@@ -54,4 +53,17 @@ def count_items_for_user(user_name):
     return dict(res_dict)
 
 
+def list_items_for_user(user_name):
+    records = session.query(Records).filter(Records.user == user_name)
+    unique_records = records.distinct(Records.parameter).all()
+    unique_parameters = [record.parameter for record in unique_records]
+    return unique_parameters
+
+
+def list_rec_time(parameter):
+    data = session.query(Records.date, Records.value, Records.units).filter(Records.parameter == parameter).all()
+    dates = [row.date for row in data]
+    values = [row.value for row in data]
+    units = data[0].units
+    return values, dates, units
 

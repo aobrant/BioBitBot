@@ -1,11 +1,11 @@
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 inline_btn_01 = InlineKeyboardButton(text='Add BioBits 🫳🏻 ', callback_data='btn_add_bits')
 inline_btn_02 = InlineKeyboardButton(text='View BioBits 👀', callback_data='btn_view_bits')
 inline_btn_03 = InlineKeyboardButton(text='Analyze your BioBits 📊 (under construction)',
                                      callback_data='btn_analyze_bits')
-inline_btn_04 = InlineKeyboardButton(text='Set reminders ⏰(under construction)', callback_data='btn_set_bits')
+# inline_btn_04 = InlineKeyboardButton(text='Set reminder ⏰(under construction)', callback_data='btn_set_reminder')
 
 inline_btn_05 = InlineKeyboardButton(text='Sports ', callback_data='btn_sports')
 inline_btn_06 = InlineKeyboardButton(text='Drinks ', callback_data='btn_drinks')
@@ -40,11 +40,10 @@ inline_btn_30 = InlineKeyboardButton(text='⬅️ Back', callback_data='back')
 inline_btn_31 = InlineKeyboardButton(text='⛪ Home', callback_data='home')
 inline_btn_32 = InlineKeyboardButton(text='Weight', callback_data='weight')
 
-
 inline_kb_begin = InlineKeyboardBuilder()
 inline_kb_begin.row(inline_btn_01, inline_btn_02)
 inline_kb_begin.row(inline_btn_03)
-inline_kb_begin.row(inline_btn_04)
+# inline_kb_begin.row(inline_btn_04)
 
 inline_kb_beats = InlineKeyboardBuilder()
 inline_kb_beats.row(inline_btn_32)
@@ -57,10 +56,20 @@ inline_kb_beats.row(inline_btn_31)
 
 inline_kb_sports = InlineKeyboardBuilder()
 inline_kb_sports.row(inline_btn_16, inline_btn_17, inline_btn_18, inline_btn_19,
-                inline_btn_20, inline_btn_21, inline_btn_22, inline_btn_31, width=1)
+                     inline_btn_20, inline_btn_21, inline_btn_22, inline_btn_31, width=1)
 
 inline_kb_drinks = InlineKeyboardBuilder()
 inline_kb_drinks.row(inline_btn_23, inline_btn_24, inline_btn_25, inline_btn_26,
-                inline_btn_27, inline_btn_28, inline_btn_29, inline_btn_31, width=3)
+                     inline_btn_27, inline_btn_28, inline_btn_29, inline_btn_31, width=3)
 
 
+def make_keyboard_from_list(uniq_parameters):
+    name_list = []
+    temp_keboard = InlineKeyboardBuilder()
+    for parameter in uniq_parameters:
+        name = "new_btn_" + str(parameter)
+        name_list.append(name)
+        button = InlineKeyboardButton(text=str(parameter), callback_data=name)
+        temp_keboard.row(button)
+    temp_keboard.row(inline_btn_31)
+    return temp_keboard, name_list
