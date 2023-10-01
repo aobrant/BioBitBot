@@ -60,7 +60,7 @@ def list_items_for_user(user_name):
     return unique_parameters
 
 
-def list_rec_time(parameter):
+def list_rec_time(parameter, user):
     data = session.query(Records.date, Records.value, Records.units).filter(Records.parameter == parameter).all()
     dates = [row.date for row in data]
     values = [row.value for row in data]

@@ -34,7 +34,7 @@ async def on_name_button_click(callback_query: types.CallbackQuery):
     user_id = callback_query.from_user.id
     # await callback_query.message.answer(f"{user_id} выбрали имя {button_text}")
     if button_text in ["walk", "run", "cicling", "fitness", "swim", "hike", "tennis", "weight", "sleep_quality"]:
-        values, dates, units = list_rec_time(button_text)
+        values, dates, units = list_rec_time(button_text, user_id)
         filepath = plot_graph(user_id, button_text, units, dates, values)
         cat = FSInputFile(filepath)
         await callback_query.message.answer_photo(cat)
@@ -49,7 +49,7 @@ async def on_name_button_click(callback_query: types.CallbackQuery):
             reply_markup=inline_kb_begin.as_markup())
 
     if button_text in ["blood_pressure"]:
-        values, dates, units = list_rec_time(button_text)
+        values, dates, units = list_rec_time(button_text, user_id)
         pressure_up, pressure_down = dec_to_int(values)
         filepath = plot_graph(user_id, button_text, units, dates, pressure_up, pressure_down)
         cat = FSInputFile(filepath)
@@ -65,7 +65,7 @@ async def on_name_button_click(callback_query: types.CallbackQuery):
             reply_markup=inline_kb_begin.as_markup())
 
     if button_text in ["beer", "wine", "vodka", "whiskey", "rum", "tequila", "gin", "coffee", "water"]:
-        values, dates, units = list_rec_time(button_text)
+        values, dates, units = list_rec_time(button_text, user_id)
         days, parameter_counts = counter_for_drinks_per_day(dates, values)
         filepath1 = plot_histogram(user_id, button_text, days, parameter_counts, units)
         cat = FSInputFile(filepath1)
