@@ -25,7 +25,7 @@ async def dlt_biobits(callback: types.CallbackQuery, state: FSMContext):
 async def on_name_button_click_del(callback_query: types.CallbackQuery, state: FSMContext):
     user_id = callback_query.from_user.id
     button_text = callback_query.data
-    string_to_remove = "new_btn_"
+    string_to_remove = "new_btn_del_"
     button_text = button_text.replace(string_to_remove, "")
     base_remove(button_text, user_id)
     await state.clear()

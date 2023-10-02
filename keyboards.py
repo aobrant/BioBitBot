@@ -79,7 +79,7 @@ def make_keyboard_del_from_list(uniq_parameters):
     name_list = []
     temp_keboard = InlineKeyboardBuilder()
     for parameter in uniq_parameters:
-        name = "new_btn_" + str(parameter)
+        name = "new_btn_del_" + str(parameter)
         name_list.append(name)
         button = InlineKeyboardButton(text=str('❌ ' + parameter), callback_data=name)
         temp_keboard.row(button)
