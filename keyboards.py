@@ -5,7 +5,7 @@ inline_btn_01 = InlineKeyboardButton(text='Add BioBits 🫳🏻 ', callback_data
 inline_btn_02 = InlineKeyboardButton(text='View BioBits 👀', callback_data='btn_view_bits')
 inline_btn_03 = InlineKeyboardButton(text='Analyze your BioBits 📊 ',
                                      callback_data='btn_analyze_bits')
-# inline_btn_04 = InlineKeyboardButton(text='Set reminder ⏰(under construction)', callback_data='btn_set_reminder')
+inline_btn_04 = InlineKeyboardButton(text='Delete Biobit 🚮', callback_data='btn_dlt')
 
 inline_btn_05 = InlineKeyboardButton(text='Sports ', callback_data='btn_sports')
 inline_btn_06 = InlineKeyboardButton(text='Drinks ', callback_data='btn_drinks')
@@ -43,7 +43,7 @@ inline_btn_32 = InlineKeyboardButton(text='Weight', callback_data='weight')
 inline_kb_begin = InlineKeyboardBuilder()
 inline_kb_begin.row(inline_btn_01, inline_btn_02)
 inline_kb_begin.row(inline_btn_03)
-# inline_kb_begin.row(inline_btn_04)
+inline_kb_begin.row(inline_btn_04)
 
 inline_kb_beats = InlineKeyboardBuilder()
 inline_kb_beats.row(inline_btn_32)
@@ -70,6 +70,18 @@ def make_keyboard_from_list(uniq_parameters):
         name = "new_btn_" + str(parameter)
         name_list.append(name)
         button = InlineKeyboardButton(text=str(parameter), callback_data=name)
+        temp_keboard.row(button)
+    temp_keboard.row(inline_btn_31)
+    return temp_keboard, name_list
+
+
+def make_keyboard_del_from_list(uniq_parameters):
+    name_list = []
+    temp_keboard = InlineKeyboardBuilder()
+    for parameter in uniq_parameters:
+        name = "new_btn_" + str(parameter)
+        name_list.append(name)
+        button = InlineKeyboardButton(text=str('❌ ' + parameter), callback_data=name)
         temp_keboard.row(button)
     temp_keboard.row(inline_btn_31)
     return temp_keboard, name_list

@@ -27,6 +27,7 @@ class States(StatesGroup):
     swimming_state = State()
     hiking_state = State()
     tennis_state = State()
+    dlt_state = State()
 
 
 def text_to_dec(txt):
